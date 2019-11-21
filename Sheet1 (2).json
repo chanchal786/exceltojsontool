@@ -1,65 +1,65 @@
 {
   "dist_refid" : "",
-  "date_updated" : "2019-11-21 20:54:23",
+  "date_updated" : "2019-11-21 21:36:09",
   "whitelisted_ids" : [ {
     "dist_refid" : "1f6d3486-24c1-413c-980e-12845c8fda5d",
-    "name" : "Decatur City Schools (16827.0)",
+    "name" : "Decatur City Schools (00016827)",
     "features" : [ {
       "name" : "share",
       "options" : [ "google|microsoft|hmh|other" ]
     } ]
   }, {
     "dist_refid" : "f165b7b1-a117-4ef7-b876-8bf257529e87",
-    "name" : "Ft. Payne City Schools (8040.0)",
+    "name" : "Ft. Payne City Schools (00008040)",
     "features" : [ {
       "name" : "share",
       "options" : [ "google|microsoft|hmh|other" ]
     } ]
   }, {
     "dist_refid" : "74dfbd30-9f56-4c35-9bac-80cbfe2582be",
-    "name" : "Garden Grove USD (96011.0)",
+    "name" : "Garden Grove USD (00096011)",
     "features" : [ {
       "name" : "share",
       "options" : [ "google|microsoft|hmh|other" ]
     } ]
   }, {
     "dist_refid" : "383c9e17-bbac-4fa2-a3f5-5611a57c18e9",
-    "name" : "Brea Olinda Unified School District (94908.0)",
+    "name" : "Brea Olinda Unified School District (00094908)",
     "features" : [ {
       "name" : "share",
       "options" : [ "google|microsoft|hmh|other" ]
     } ]
   }, {
     "dist_refid" : "5696d9fa-a796-4ef8-a96d-9066fc9c36da",
-    "name" : "Central USD (58980.0)",
+    "name" : "Central USD (00058980)",
     "features" : [ {
       "name" : "share",
       "options" : [ "google|microsoft|hmh|other" ]
     } ]
   }, {
     "dist_refid" : "43515696-1217-44bb-8560-f74b48920311",
-    "name" : "Rosedale USD (63727.0)",
+    "name" : "Rosedale USD (00063727)",
     "features" : [ {
       "name" : "share",
       "options" : [ "google|microsoft|hmh|other" ]
     } ]
   }, {
     "dist_refid" : "565c436f-35e7-4cd1-9c91-be765577a2b7",
-    "name" : "Fullerton Joint Union (95926.0)",
+    "name" : "Fullerton Joint Union (00095926)",
     "features" : [ {
       "name" : "share",
       "options" : [ "google|microsoft|hmh|other" ]
     } ]
   }, {
     "dist_refid" : "949f4ccd-b38d-4193-a1df-9f514a2dbb2f",
-    "name" : "Norris SD (63569.0)",
+    "name" : "Norris SD (00063569)",
     "features" : [ {
       "name" : "share",
       "options" : [ "google|microsoft|hmh|other" ]
     } ]
   }, {
     "dist_refid" : "32ff4a57-241b-46ac-a6be-1ff171ef3b9d",
-    "name" : "Conejo Unified School District (140894.0)",
+    "name" : "Conejo Unified School District (00140894)",
     "features" : [ {
       "name" : "share",
       "options" : [ "google|microsoft|hmh|other" ]

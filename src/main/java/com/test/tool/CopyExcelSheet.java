@@ -44,9 +44,9 @@ public class CopyExcelSheet {
 							if (j == 2) {
 								Cell cell4 = row.getCell(4);
 								int cellType4 = cell4.getCellType().getCode();
-								if (cellType == CellType.STRING.getCode() && cellType4 == CellType.NUMERIC.getCode()) {
+								if (cellType == CellType.STRING.getCode() && cellType4 == CellType.STRING.getCode()) {
 									// double numberValue1 = cell4.getNumericCellValue();
-									String cellValue = cell.getStringCellValue() + " (" + cell4.getNumericCellValue()
+									String cellValue = cell.getStringCellValue() + " (" + cell4.getStringCellValue()
 											+ ")";
 									rowDataList.add(cellValue);
 								}
