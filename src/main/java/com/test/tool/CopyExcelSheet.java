@@ -13,9 +13,8 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-
 public class CopyExcelSheet {
-	
+
 	public List<List<String>> getExcelData(String excelFilePath, String excelSheetName) {
 		List<List<String>> ret = new ArrayList();
 		if (excelFilePath != null && !"".equals(excelFilePath.trim()) && excelSheetName != null
@@ -27,33 +26,32 @@ public class CopyExcelSheet {
 				int fRowNum = copySheet.getFirstRowNum();
 				int lRowNum = copySheet.getLastRowNum();
 				for (int i = fRowNum + 1; i < lRowNum + 1; i++) {
-				//	if (i >= startRow && i <= endRow) {
-						Row row = copySheet.getRow(i);
-						int fCellNum = row.getFirstCellNum();
-					//	int lCellNum = row.getLastCellNum();
-						List<String> rowDataList = new ArrayList<String>();
-						for (int j = fCellNum; j < 6; j++) {
-							Cell cell = row.getCell(j);
-							int cellType = cell.getCellType().getCode();
-							if (j == 5) {
-								if (cellType == CellType.STRING.getCode()) {
-									String cellValue = cell.getStringCellValue();
-									rowDataList.add(cellValue);
-								}
-							}
-							if (j == 2) {
-								Cell cell4 = row.getCell(4);
-								int cellType4 = cell4.getCellType().getCode();
-								if (cellType == CellType.STRING.getCode() && cellType4 == CellType.STRING.getCode()) {
-									// double numberValue1 = cell4.getNumericCellValue();
-									String cellValue = cell.getStringCellValue() + " (" + cell4.getStringCellValue()
-											+ ")";
-									rowDataList.add(cellValue);
-								}
+					// if (i >= startRow && i <= endRow) {
+					Row row = copySheet.getRow(i);
+					int fCellNum = row.getFirstCellNum();
+					// int lCellNum = row.getLastCellNum();
+					List<String> rowDataList = new ArrayList<String>();
+					for (int j = fCellNum; j < 6; j++) {
+						Cell cell = row.getCell(j);
+						int cellType = cell.getCellType().getCode();
+						if (j == 5) {
+							if (cellType == CellType.STRING.getCode()) {
+								String cellValue = cell.getStringCellValue();
+								rowDataList.add(cellValue);
 							}
 						}
-						ret.add(rowDataList);
-				//	}
+						if (j == 2) {
+							Cell cell4 = row.getCell(4);
+							int cellType4 = cell4.getCellType().getCode();
+							if (cellType == CellType.STRING.getCode() && cellType4 == CellType.STRING.getCode()) {
+								// double numberValue1 = cell4.getNumericCellValue();
+								String cellValue = cell.getStringCellValue() + " (" + cell4.getStringCellValue() + ")";
+								rowDataList.add(cellValue);
+							}
+						}
+					}
+					ret.add(rowDataList);
+					// }
 				}
 			} catch (Exception ex) {
 				ex.printStackTrace();
@@ -95,12 +93,15 @@ public class CopyExcelSheet {
 							if (j == 0) {
 								String cellValue = cellDataList.get(j + 1);
 								row.createCell(j).setCellValue(cellValue);
-							} else {
+							}
+							if (j == 1) {
 								String cellValue = cellDataList.get(j - 1);
 								row.createCell(j).setCellValue(cellValue);
 							}
-							String cellValue = "[{\"name\":\"share\",\"options\":[\"google|microsoft|hmh|other\"]}]";
-							row.createCell(j + 2).setCellValue(cellValue);
+							if (j == 2) {
+								String cellValue = "[{\"name\":\"share\",\"options\":[\"google|microsoft|hmh|other\"]}]";
+								row.createCell(j).setCellValue(cellValue);
+							}
 						}
 					}
 				}

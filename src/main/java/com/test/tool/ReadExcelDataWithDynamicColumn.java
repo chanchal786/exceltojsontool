@@ -10,8 +10,10 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -54,7 +56,7 @@ public class ReadExcelDataWithDynamicColumn {
 		creteJSONFileFromExcel(excelFilePath);
 	}
 
-	private static String dataToJSON(List<List<String>> dataTable)
+	private static String dataToOrgToJSON(List<List<String>> dataTable)
 			throws JsonGenerationException, JsonMappingException, IOException {
 		JsonObjectBuilder jsonBuilder = Json.createObjectBuilder();
 		jsonBuilder.add("dist_refid", "");
@@ -65,6 +67,23 @@ public class ReadExcelDataWithDynamicColumn {
 		System.out.println(dtf.format(now));
 		String ret = "";
 		String indented = "";
+		List<String> dataRowb = new ArrayList<String>();
+		if (dataTable != null) {
+			int rowCount = dataTable.size();
+			for (int i = 0; i < rowCount; i++) {
+				dataRowb = dataTable.get(i);
+			}
+		}
+		for (String temp : dataRowb) {
+			System.out.println(temp);
+		}
+		Set<String> set = new HashSet<String>(dataRowb);
+
+		System.out.println("Set values .....");
+		for (String temp : set) {
+			System.out.println(temp);
+		}
+
 		if (dataTable != null) {
 			int rowCount = dataTable.size();
 			if (rowCount > 1) {
@@ -77,6 +96,87 @@ public class ReadExcelDataWithDynamicColumn {
 					for (int j = 0; j < columnCount; j++) {
 						String columnName = headerRow.get(j);
 						String columnValue = dataRow.get(j);
+						jsonBuilder1.add(columnName, columnValue);
+					}
+					pbuilder.add(jsonBuilder1);
+				}
+				jsonBuilder.add("whitelisted_ids", pbuilder);
+				JsonObject empObj = jsonBuilder.build();
+				StringWriter strWtr = new StringWriter();
+				JsonWriter jsonWtr = Json.createWriter(strWtr);
+				jsonWtr.writeObject(empObj);
+				jsonWtr.close();
+				ret = strWtr.toString().replace("\\", "").replace("\"[", "[").replace("]\"", "]");
+				System.out.println(ret);
+				ObjectMapper mapper = new ObjectMapper();
+				Object json = mapper.readValue(ret, Object.class);
+				indented = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(json);
+//				System.out.println(indented);
+			}
+		}
+		return indented;
+	}
+
+	private static String dataToJSON(List<List<String>> dataTable)
+			throws JsonGenerationException, JsonMappingException, IOException {
+		JsonObjectBuilder jsonBuilder = Json.createObjectBuilder();
+		jsonBuilder.add("dist_refid", "");
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		LocalDateTime now = LocalDateTime.now();
+		jsonBuilder.add("date_updated", dtf.format(now));
+
+		System.out.println(dtf.format(now));
+		String ret = "";
+		String indented = "";
+		List<String> dataRowb = new ArrayList<String>();
+		List<String> headerRow1 = dataTable.get(0);
+		int rowCount1 = dataTable.size();
+		if (dataTable != null) {
+//			int columnCount1=headerRow.size();
+			for (int i = 1; i < rowCount1; i++) {
+				List<String> dataRow = dataTable.get(i);
+				String str = dataRow.get(0) + " AZ0ZA " + dataRow.get(1) + " AZ0ZA " + dataRow.get(2);
+				dataRowb.add(str);
+//				System.out.println(str);
+			}
+		}
+		System.out.println(".............Data with duplicate values...........");
+		for (String temp : dataRowb) {
+			System.out.println(temp);
+		}
+		
+		Set<String> set = new HashSet<String>(dataRowb);
+		System.out.println(".............Set values...........");
+		for (String temp : set) {
+			System.out.println(temp);
+		}
+		String rowHeader=headerRow1.get(0) + " AZ0ZA " + headerRow1.get(1) + " AZ0ZA " + headerRow1.get(2);
+//		System.out.println(rowHeader);
+		List<String> dataRowb1 = new ArrayList<String>(set);
+		dataRowb1.add(0, rowHeader);
+		System.out.println(".............List values...........");
+		for (String temp : dataRowb1) {
+			System.out.println(temp);
+		}
+
+//		Pattern patternRev = Pattern.compile("(.*?)(r[0-9]{3,})(\\d+?)");
+ //       Matcher matcherRev = patternRev.matcher(dataRowb1.get(0));
+		if (dataTable != null) {
+			int rowCount = dataTable.size();
+			if (rowCount > 1) {
+				List<String> headerRow = dataTable.get(0);
+				int columnCount = headerRow.size();
+				JsonArrayBuilder pbuilder = Json.createArrayBuilder();
+				for (int i = 1; i < dataRowb1.size(); i++) {
+					JsonObjectBuilder jsonBuilder1 = Json.createObjectBuilder();
+//					List<String> dataRow = dataTable.get(i);
+					String strr=dataRowb1.get(i);
+					String[] sp=strr.split(" AZ0ZA ");
+//					System.out.println("Data row " + dataRow);
+//					System.out.println("Copied column count : " + columnCount);
+					for (int j = 0; j < columnCount; j++) {
+						String columnName = headerRow.get(j);
+						String columnValue = sp[j];
 						jsonBuilder1.add(columnName, columnValue);
 					}
 					pbuilder.add(jsonBuilder1);
